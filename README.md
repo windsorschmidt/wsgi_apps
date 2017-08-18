@@ -1,2 +1,2 @@
 # wsgi_apps
-OPL Web Micro-services
+OPL Web Micro Applications
