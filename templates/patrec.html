@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Patron Record Tool</title>
+    <link rel="stylesheet" href="/static/patrec.css">
+  </head>
+  <body>
+    <h1>OPL Patron Record Tool</h1>
+    <p>Enter a list of barcode numbers in the text area below, one per line.</p>
+    <div class="notes">
+      <h2>Notes:</h2>
+      <ul>
+        <li>
+          This tool may take <b>up to 10 minutes</b> to return results. There is no progress indicator.
+        </li>
+        <li>
+          The script will not perform any duplicate checking. If two
+          different barcodes corresponding to the same p number are queried,
+          then the results file will have two of the same p number.
+          This can be cleaned up in Excel.
+        </li>
+      </ul>
+    </div>
+    <form action="#" method="post">
+      <div class="form-input">
+        <textarea name="barcodes" id="barcodes" rows="6" cols="18"></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit">Go baby go!</button>
+      </div>
+    </form>
+    <div class="records">
+      {% if records %}
+      <h2>Results:</h2>
+      <ul>
+        {% for r in records %}
+        <li>{{ r }}</li>
+        {% endfor %}
+      </ul>
+      {% endif %}
+    </div>
+  </body>
+</html>

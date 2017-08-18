@@ -1,0 +1,28 @@
+body {
+  font-family: serif;
+}
+
+h1 {
+  font-size: x-large;
+}
+
+h2 {
+  font-size: large;
+}
+
+ul li {
+    margin-bottom: 1em;
+}
+
+textarea {
+  border-radius: 2px;
+  padding: 4px;
+}
+
+button {
+  padding: 8px 25px 8px 25px;
+}
+
+.notes {
+  font-size: 0.8em;
+}

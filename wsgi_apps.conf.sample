@@ -1,0 +1,5 @@
+# OPL Web Micro Application Config
+
+[app_name]
+# A comment!
+config_key_name = config_key_value
