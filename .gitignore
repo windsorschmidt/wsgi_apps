@@ -1,3 +1,4 @@
 wsgi_apps.conf
+data
 __pycache__
 *.log

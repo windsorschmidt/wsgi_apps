@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>OPL Digital Signage</title>
+    <link rel="stylesheet" href="/static/sign.css">
+  </head>
+  <body>
+    {% if branch %}
+    <div id="main" data-hash="{{ slides_hash.value }}" data-branch="{{ branch }}" >
+      <div class="details{% if details %} shown{% endif %}">
+        <p>Hi there! You're at <b>{{ branch }}</b>. Slides for this branch:</p>
+        <table>
+          <tr>
+            <th>Image Preview</th>
+            <th>Title</th>
+            <th>Duration</th>
+          </tr>
+          {% for s in slides %}
+          <tr class="info" data-duration="{{ s.duration }}">
+            <td>
+              <span class="thumb">
+                <a href="{{ s.image_url }}"><img src="{{ s.image_url }}"></a>
+              </span>
+            </td>
+            <td>{{ s.title }}</td>
+            <td>{{ s.duration }}</td>
+          </tr>
+          {% endfor %}
+        </table>
+      </div>
+      <div class="slide_container">
+        {% for s in slides %}
+        <img class="slide" src="{{ s.image_url }}">
+        {% endfor %}
+      </div>
+    </div>
+  </body>
+  {% else %}
+  <div id="main">
+    <div class="details shown">
+      <p>Unknown branch for client with MAC address {{ mac }}. Please check your configuration.</p>
+  </div>
+  {% endif %} 
+  <script src="/static/sign.js"></script>
+</html>
