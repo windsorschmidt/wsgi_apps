@@ -22,9 +22,6 @@ AUTH_PASS = config['sign']['auth_pass']
 
 logging.basicConfig(filename=__name__ + '.log', level=logging.INFO)
 
-with open(MAC_FILE) as f:
-    macs = json.load(f)
-
 
 @app.route('/view/<mac>')
 def route_view(mac):
@@ -41,6 +38,13 @@ def route_view(mac):
 def route_hash(mac):
     branch = macs[mac] if mac in macs else None
     return jsonify(hash_slides(get_slides(branch)))
+
+
+@app.route('/reload')
+def route_reload():
+    global macs
+    macs = load_macs()
+    return jsonify(macs)
 
 
 def get_slides(branch):
@@ -66,3 +70,13 @@ def get_slides(branch):
 def hash_slides(s):
     h = hashlib.md5(json.dumps(s, sort_keys=True).encode('utf-8')).hexdigest()
     return {'value': h}
+
+
+def load_macs():
+    macs = {}
+    with open(MAC_FILE) as f:
+        macs = json.load(f)
+    return macs
+
+
+macs = load_macs()
