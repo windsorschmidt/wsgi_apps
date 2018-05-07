@@ -1,4 +1,5 @@
 body {
+  overflow: hidden;
   font-family: serif;
   background-color: #080808;
   color: #e4e4e4;
@@ -83,6 +84,10 @@ td {
 
 .slide_container {
   position: relative;
+}
+
+.slide_container img {
+  image-rendering: pixelated;
 }
 
 .slide {

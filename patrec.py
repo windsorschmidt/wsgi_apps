@@ -34,6 +34,9 @@ def get_records(barcodes):
     """Return a list of patron records, given a list of barcodes"""
     r = []
     for i, b in enumerate(barcodes):
+        if len(b) is not 14:
+            e = "Barcode {} has length {} (should be 14)".format(b, len(b))
+            return ["Error: {}".format(e)]
         logging.info('gathering data for barcode {} [{}/{}]'
                      .format(b, i+1, len(barcodes)))
         r.extend(['{}|p{}'.format(b, s) for s in get_patron_record(b)])
@@ -43,6 +46,7 @@ def get_records(barcodes):
 def get_patron_record(b):
     """Return the record number(s) for the given barcode number."""
     r = requests.get(API_URL_BARCODE + str(b) + "/dump")  # Get from server
+    r.raise_for_status()
     t = r.text.splitlines()
     m = [s for s in t if "RECORD #" in s]
     x = [s.replace('<BR>', '').split('=')[1] for s in m]
